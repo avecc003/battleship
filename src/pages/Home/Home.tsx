@@ -1,0 +1,22 @@
+import { useState } from "react";
+import JoinGameInput from "../../components/JoinGameInput/JoinGameInput";
+
+const Home = () => {
+    const [ isJoining, setIsJoining ] = useState(false);
+    const HOME_BUTTON_STYLE = "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600";
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+          <button className={HOME_BUTTON_STYLE}>
+            Start Game
+          </button>
+          <div>
+            <button className={HOME_BUTTON_STYLE + " mt-4"} onClick={() => setIsJoining(prev => !prev)}>
+              Join Game
+            </button>
+            { isJoining && ( <JoinGameInput onSubmit={() => {}} onClick={() => {}} />)}
+          </div>
+        </div>
+    );
+}
+
+export default Home;
