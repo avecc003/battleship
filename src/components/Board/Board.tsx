@@ -2,9 +2,11 @@ import clsx from "clsx";
 import BoardTile from "./BoardTile";
 import { BOARD_SIZE } from "./utils.BoardTile";
 
-const Board = () => {
-    const board = Array.from({ length: BOARD_SIZE * BOARD_SIZE }, (_, i) => ({ id: i, name: `Component ${i + 1}` }));
+type BoardProps = {
+    boardState?: number[][];
+}
 
+const Board = ({ boardState }: BoardProps) => {
     return ( 
         <div 
         className={clsx(
@@ -16,7 +18,11 @@ const Board = () => {
                 gridTemplateRows: `repeat(${BOARD_SIZE}, minmax(0, 1fr))`
         }}
         >
-            { board.map(tile => <BoardTile key={tile.id} number={tile.id} />)  }
+            { boardState?.map((row, rowIndex) => 
+                row.map((tile, colIndex) => 
+                    <BoardTile key={`${rowIndex}-${colIndex}`} boardPos={rowIndex * BOARD_SIZE + colIndex} state={tile} />
+                )
+            )}
         </div>
     )
 }

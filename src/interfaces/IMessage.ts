@@ -1,5 +1,5 @@
 export default interface IMessage { 
-    sender: string;
+    roomId: string;
     x: number;
     y: number;
     type: "attack" | "result";
