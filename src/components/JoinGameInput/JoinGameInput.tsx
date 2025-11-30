@@ -1,13 +1,13 @@
 type JoinGameInputType = {
-  onClick: () => void;
-  onSubmit: () => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const JoinGameInput = ({ onClick, onSubmit }: JoinGameInputType) => {
+const JoinGameInput = ({ onSubmit }: JoinGameInputType) => {
   return (
     <form className="flex items-center" onSubmit={onSubmit}>
       <input
         type="text"
+        name="gameId"
         placeholder="Enter Game Code"
         className="border p-2 rounded mr-2"
       />

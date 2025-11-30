@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Board from "../../components/Board";
 import IGameState from "../../interfaces/IGameState";
-import useBattleShipGame from "../../hooks/useBattleshipGame";
 import { BOARD_SIZE } from "../../components/Board/utils.BoardTile";
+import CopyRoomToClipBoard from "../../components/CopyRoomToClipBoard";
 
 const Game = () => {
     const roomId = new URLSearchParams(window.location.search).get("gameId");
@@ -17,11 +17,10 @@ const Game = () => {
         gameStatus: "waiting_for_opponent"
       }
     );
-
-    const { ws, message, messageHistory, sendMessage } = useBattleShipGame(roomId);
-    
+  
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 gap-10">
+          <CopyRoomToClipBoard />
           <div> 
             <h2> Your Board </h2>
             <Board boardState={gameState?.playerBoard} />

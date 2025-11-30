@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import IMessage from '../interfaces/IMessage';
 
 
-const BattleshipGameStart = (roomId: string | null) => {
+const BattleshipGame = (roomId: string | null) => {
   const [ ws, setWs ] = useState<WebSocket | null>(null);
   const [ message, setMessages ] = useState<IMessage>({} as IMessage);
   const [ messageHistory, setMessageHistory ] = useState<IMessage[]>([]);
 
   useEffect(() => {
-      const socket = new WebSocket(process.env.BATTLESHIP_WS_URL || 'ws://localhost:8080');
+      const socket = new WebSocket(process.env.BATTLESHIP_WS_URL || 'ws://localhost:8080/battleship');
 
       socket.onopen = () => console.log("Connected to WebSocket server");
-
+ 
       socket.onmessage = (event) => {
         setMessages(prev => event.data as IMessage);
       };
@@ -38,4 +38,4 @@ const BattleshipGameStart = (roomId: string | null) => {
   return { ws, message, messageHistory, sendMessage };
 };
 
-export default BattleshipGameStart;
+export default BattleshipGame;

@@ -10,6 +10,15 @@ const Home = () => {
         const gameId = crypto.randomUUID();
         navigate(`/game?gameId=${gameId}`);
     };
+    
+    const handleJoinGame = (e : React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const gameId = formData.get("gameId");
+      if (typeof gameId === "string" && gameId.trim() !== "") {
+        navigate(`/game?gameId=${gameId}`);
+      }
+    };
 
     const HOME_BUTTON_STYLE = "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600";
     return (
@@ -21,7 +30,7 @@ const Home = () => {
             <button className={HOME_BUTTON_STYLE + " mt-4"} onClick={() => setIsJoining(prev => !prev)}>
               Join Game
             </button>
-            { isJoining && ( <JoinGameInput onSubmit={() => {}} onClick={() => {}} />)}
+            { isJoining && ( <JoinGameInput onSubmit={handleJoinGame} />)}
           </div>
         </div>
     );
